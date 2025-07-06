@@ -14,6 +14,8 @@
     <!-- Header -->
     <header class="bg-white shadow-sm px-6 py-4 flex justify-between items-center">
       <h1 class="text-2xl font-bold text-blue-600">PG Life</h1>
+
+
       <!-- Login and Signup and Logout and Profile -->
       <div class=" space-x-3" id="login-signup-profile-logout">
       
@@ -46,16 +48,16 @@
         <h2 class="text-2xl font-bold mb-8">Major Cities</h2>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
           <a href="property_list.html?city=Delhi" class="rounded-xl overflow-hidden shadow-lg aspect-square w-full">
-            <img src="/frontend/Images/img/delhi.png" alt="Delhi" class="w-full h-full object-cover" loading="lazy" />
+            <img src="../Images/img/delhi.png" alt="Delhi" class="w-full h-full object-cover" loading="lazy" />
           </a>
           <a href="property_list.html?city=Mumbai" class="rounded-xl overflow-hidden shadow-lg aspect-square w-full">
-            <img src="/frontend/Images/img/mumbai.png" alt="Mumbai" class="w-full h-full object-cover" loading="lazy" />
+            <img src="../Images/img/mumbai.png" alt="Mumbai" class="w-full h-full object-cover" loading="lazy" />
           </a>
           <a href="property_list.html?city=Bengaluru" class="rounded-xl overflow-hidden shadow-lg aspect-square w-full">
-            <img src="/frontend/Images/img/bangalore.png" alt="Bengaluru" class="w-full h-full object-cover" loading="lazy" />
+            <img src="../Images/img/bangalore.png" alt="Bengaluru" class="w-full h-full object-cover" loading="lazy" />
           </a>
           <a href="property_list.html?city=Hyderabad" class="rounded-xl overflow-hidden shadow-lg aspect-square w-full">
-            <img src="/frontend/Images/img/hyderabad.png" alt="Hyderabad" class="w-full h-full object-cover" loading="lazy" />
+            <img src="../Images/img/hyderabad.png" alt="Hyderabad" class="w-full h-full object-cover" loading="lazy" />
           </a>
         </div>
       </section>
@@ -67,11 +69,13 @@
     </footer>
 
     <script>
+      const BASE_URL = 'https://pg-life-backend-2.onrender.com'
+
       const searchResultsContainer = document.getElementById("search-results");
       // div , h3 , p , p , button
       
       const featchPropertys = async() => {
-        const res = await fetch(`http://localhost:3000/api/v1/property/get-properties`,{
+        const res = await fetch(`${BASE_URL}/api/v1/property/get-properties`,{
           method:"GET",
           headers: {
             "Content-Type": "application/json",
@@ -138,20 +142,20 @@
       const authIcon = document.getElementById('login-signup-profile-logout')
 
        console.log('Checking user authentication...');
-        const userRes = await fetch('http://localhost:3000/api/v1/auth/check',{
+        const userRes = await fetch(`${BASE_URL}/api/v1/auth/check`,{
           credentials: 'include'
         })
         const userData = await userRes.json()
         console.log('User data:', userData);
         if (userRes.status !== 200) {
-         authIcon.innerHTML = `<a href="/frontend/Login/login.html" class="text-blue-600 font-medium hover:underline">Login</a>
-        <a href="/frontend/signUp/signup.html" class="text-blue-600 font-medium hover:underline" >Signup</a>`
+         authIcon.innerHTML = `<a href="../Login/login.html" class="text-blue-600 font-medium hover:underline">Login</a>
+        <a href="../signUp/signup.html" class="text-blue-600 font-medium hover:underline" >Signup</a>`
           return;
         } else{
          authIcon.innerHTML = ` 
-          <a href="/frontend/profile/profile.html" class="text-blue-600 font-medium hover:underline">Profile</a>
-          <a href="/frontend/Login/login.html" class="text-blue-600 font-medium hover:underline" onclick="logout()" >Logout</a> 
-          <a href="/frontend/All-Properties/all-properties.html" class="text-blue-600 font-medium hover:underline" >All Properties</a> 
+          <a href="../profile/profile.html" class="text-blue-600 font-medium hover:underline">Profile</a>
+          <a href="../Login/login.html" class="text-blue-600 font-medium hover:underline" onclick="logout()" >Logout</a> 
+          <a href="../All-Properties/all-properties.html" class="text-blue-600 font-medium hover:underline" >All Properties</a> 
           `
         return;
         }
@@ -159,7 +163,7 @@
 
     
      const viewPropertyButton = (id) => {
-      const url = `/frontend/properties-detail/property-detail.html?id=${id}`;
+      const url = `../properties-detail/property-detail.html?id=${id}`;
       console.log('Redirecting to:', url); // ✅ This confirms the URL
       window.location.href = url;
 
@@ -167,11 +171,11 @@
 
          
     const logout = () => {
-      fetch('http://localhost:3000/api/v1/auth/logout', {
+      fetch(`${BASE_URL}/api/v1/auth/logout`, {
         method: 'GET',
         credentials: 'include'
       });
-      window.location.href = '/frontend/Login/login.html';
+      window.location.href = '../Login/login.html';
     }
       
     window.addEventListener('load', async function () {
@@ -223,7 +227,7 @@
 
 
         const link = document.createElement('a');
-        link.href = `/frontend/properties-detail/property-detail?id=${property.id}`;
+        link.href = `../properties-detail/property-detail?id=${property.id}`;
         link.classList = 'mt-2 text-blue-600 hover:underline text-sm inline-block';
         link.textContent = 'View Details';
 

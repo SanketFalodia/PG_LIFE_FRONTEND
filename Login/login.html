@@ -39,11 +39,13 @@
 
     <div class="text-center mt-4 text-sm">
       <span>Don't have an account?</span>
-      <a href="/frontend/signUp/signup.html" class="text-blue-600 hover:underline">Click here to register</a>
+      <a href="../signUp/signup.html" class="text-blue-600 hover:underline">Click here to register</a>
     </div>
   </div>
 
   <script>
+      const BASE_URL = 'https://pg-life-backend-2.onrender.com'
+
     document.getElementById("login-form").addEventListener("submit", async function(e) {
       e.preventDefault();
       const email = this.email.value;
@@ -51,7 +53,7 @@
       const messageBox = document.getElementById("login-message");
 
       try {
-        const res = await fetch("http://localhost:3000/api/v1/auth/login", {
+        const res = await fetch(`${BASE_URL}/api/v1/auth/login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include", // for sending cookies
@@ -63,7 +65,7 @@
           messageBox.style.color = "green";
           messageBox.textContent = "Login successful! Redirecting...";
           setTimeout(() => {
-            window.location.href = "/frontend/home/home.html";
+            window.location.href = "../home/home.html";
           }, 1500);
         } else {
           messageBox.style.color = "red";
